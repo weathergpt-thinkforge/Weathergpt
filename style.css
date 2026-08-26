@@ -1,0 +1,823 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef6ff;
+    color: #222;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* Header */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+header h1 {
+    font-size: 32px;
+    color: #1769aa;
+}
+
+header p {
+    margin-top: 5px;
+    color: #666;
+}
+
+#darkModeButton {
+    border: none;
+    background: white;
+    font-size: 22px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+/* Search */
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button {
+    border: none;
+    background: #1769aa;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover {
+    background: #0d4f82;
+}
+
+
+/* Main Weather */
+
+.weather-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.weather-card h2 {
+    margin-bottom: 20px;
+}
+
+.main-weather {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.weather-icon {
+    font-size: 70px;
+}
+
+.main-weather h3 {
+    font-size: 50px;
+}
+
+.main-weather p {
+    color: #666;
+    font-size: 18px;
+}
+
+
+/* Information Cards */
+
+.weather-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.info-card {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.info-card span {
+    font-size: 28px;
+}
+
+.info-card h3 {
+    margin: 10px 0 5px;
+}
+
+.info-card p {
+    color: #777;
+}
+
+
+/* Forecast */
+
+.forecast {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.forecast h2 {
+    margin-bottom: 20px;
+}
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.day {
+    text-align: center;
+    padding: 15px 5px;
+    border-radius: 12px;
+    background: #f1f7fc;
+}
+
+.day span {
+    display: block;
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+
+/* Chat */
+
+.chat-section {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.chat-description {
+    color: #777;
+    margin: 8px 0 20px;
+}
+
+.chat-messages {
+    min-height: 100px;
+    margin-bottom: 15px;
+}
+
+.bot-message,
+.user-message {
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    max-width: 80%;
+}
+
+.bot-message {
+    background: #e7f2ff;
+}
+
+.user-message {
+    background: #1769aa;
+    color: white;
+    margin-left: auto;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #777;
+}
+
+
+/* Dark Mode */
+
+body.dark {
+    background: #121b24;
+    color: white;
+}
+
+body.dark .weather-card,
+body.dark .info-card,
+body.dark .forecast,
+body.dark .chat-section {
+    background: #1d2a36;
+}
+
+body.dark .day {
+    background: #263746;
+}
+
+body.dark .search-box input,
+body.dark .chat-input input {
+    background: #263746;
+    color: white;
+}
+
+body.dark header p,
+body.dark .main-weather p,
+body.dark .chat-description {
+    color: #bbb;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .weather-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .main-weather h3 {
+        font-size: 40px;
+    }
+
+    .weather-icon {
+        font-size: 55px;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+}
+
+/* Weather Risk */
+
+.risk-section {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.risk-section h2 {
+    margin-bottom: 15px;
+}
+
+.risk-alert {
+    padding: 15px;
+    border-radius: 10px;
+    background: #e8f5e9;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.risk-section p {
+    color: #666;
+}
+
+
+/* Dark mode */
+
+body.dark .risk-section {
+    background: #1d2a36;
+}
+
+body.dark .risk-section p {
+    color: #bbb;
+}
+
+/* Language Selector */
+
+.language-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.language-box select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+}
+
+body.dark .language-box select {
+    background: #263746;
+    color: white;
+}
+
+/* Voice Input */
+
+#voiceStatus {
+    margin-top: 10px;
+    color: #1769aa;
+    font-size: 14px;
+}
+
+.chat-input button {
+    min-width: 50px;
+}
+
+body.dark #voiceStatus {
+    color: #7fc7ff;
+}
+
+/* Google-style Voice */
+
+.voice-button {
+    font-size: 20px;
+    min-width: 52px;
+}
+
+.voice-overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.voice-box {
+    width: 90%;
+    max-width: 420px;
+
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+.voice-mic {
+    width: 90px;
+    height: 90px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: #1769aa;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 40px;
+
+    animation: micPulse 1.2s infinite;
+}
+
+.voice-box h2 {
+    margin-top: 25px;
+}
+
+.voice-box p {
+    color: #777;
+    margin-top: 8px;
+}
+
+.voice-waves {
+    height: 50px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    margin: 25px 0;
+}
+
+.voice-waves span {
+    width: 5px;
+    height: 20px;
+
+    background: #1769aa;
+
+    border-radius: 10px;
+
+    animation: voiceWave 0.8s infinite ease-in-out;
+}
+
+.voice-waves span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.voice-waves span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.voice-waves span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.voice-waves span:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.stop-voice {
+    background: #555;
+}
+
+@keyframes micPulse {
+
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(23,105,170,0.5);
+    }
+
+    70% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 20px rgba(23,105,170,0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+@keyframes voiceWave {
+
+    0%, 100% {
+        height: 15px;
+    }
+
+    50% {
+        height: 45px;
+    }
+
+}
+
+body.dark .voice-box {
+    background: #1d2a36;
+    color: white;
+}
+
+body.dark .voice-box p {
+    color: #bbb;
+}
+
+/* Voice Answer */
+
+.voice-answer-control {
+    margin-top: 10px;
+}
+
+.voice-answer-control button {
+    background: #555;
+    font-size: 13px;
+    padding: 8px 12px;
+}
+
+.voice-answer-control button:hover {
+    background: #333;
+}
+
+/* Historical Climate */
+
+.climate-section {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.climate-section h2 {
+    margin-bottom: 8px;
+}
+
+.climate-description {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.climate-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.climate-controls input {
+    width: 150px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.climate-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.climate-card {
+    background: #f1f7fc;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.climate-card span {
+    font-size: 28px;
+}
+
+.climate-card h3 {
+    font-size: 24px;
+    margin: 10px 0 5px;
+}
+
+.climate-card p {
+    color: #666;
+    font-size: 14px;
+}
+
+.climate-result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e7f2ff;
+    border-radius: 10px;
+}
+
+/* Dark mode */
+
+body.dark .climate-section {
+    background: #1d2a36;
+}
+
+body.dark .climate-card {
+    background: #263746;
+}
+
+body.dark .climate-card p,
+body.dark .climate-description {
+    color: #bbb;
+}
+
+body.dark .climate-result {
+    background: #263746;
+}
+
+/* Weather Map */
+
+.map-section {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.map-section h2 {
+    margin-bottom: 8px;
+}
+
+.map-description {
+    color: #777;
+    margin-bottom: 15px;
+}
+
+#weatherMap {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.map-weather-info {
+    margin-top: 15px;
+    padding: 15px;
+    background: #eef6ff;
+    border-radius: 10px;
+}
+
+
+/* Dark mode */
+
+body.dark .map-section {
+    background: #1d2a36;
+}
+
+body.dark .map-description {
+    color: #bbb;
+}
+
+body.dark .map-weather-info {
+    background: #263746;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    #weatherMap {
+        height: 300px;
+    }
+
+}
+
+/* Hourly Forecast */
+
+.hourly-section {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.hourly-description {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.hourly-container {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.hour-card {
+    min-width: 110px;
+    background: #f1f7fc;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+}
+
+.hour-card .hour-time {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hour-card .hour-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.hour-card .hour-temp {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.hour-card .hour-rain {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #1769aa;
+}
+
+/* Dark mode */
+
+body.dark .hourly-section {
+    background: #1d2a36;
+}
+
+body.dark .hourly-description {
+    color: #bbb;
+}
+
+body.dark .hour-card {
+    background: #263746;
+}
+
+/* Hourly Forecast + Graph */
+
+.hourly-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.temperature-graph {
+    background: #f1f7fc;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.temperature-graph h3 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#temperatureChart {
+    width: 100%;
+    height: 180px;
+}
+
+
+/* Dark mode */
+
+body.dark .temperature-graph {
+    background: #263746;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .hourly-layout {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* Agriculture Advisory */
+
+.agriculture-section {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.agriculture-section h2 {
+    margin-bottom: 8px;
+}
+
+.agriculture-section > p {
+    color: #777;
+    margin-bottom: 15px;
+}
+
+#agricultureAdvice {
+    padding: 20px;
+    background: #f1f7fc;
+    border-radius: 15px;
+    line-height: 1.7;
+}
+
+
+/* Dark mode */
+
+body.dark .agriculture-section {
+    background: #1d2a36;
+}
+
+body.dark .agriculture-section > p {
+    color: #bbb;
+}
+
+body.dark #agricultureAdvice {
+    background: #263746;
+}

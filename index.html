@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WeatherGPT</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet Map -->
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <div>
+                <h1>🌦️ WeatherGPT</h1>
+                <p>AI Weather Intelligence</p>
+            </div>
+
+            <button id="darkModeButton">🌙</button>
+        </header>
+
+
+        <!-- Search -->
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter your city..."
+            >
+        
+            <button onclick="searchWeather()">
+                Search
+            </button>
+        
+            <button onclick="getMyLocation()">
+                📍 My Location
+            </button>
+        
+        </div>
+
+
+        <!-- Current Weather -->
+        <section class="weather-card">
+
+            <h2 id="cityName">Kochi, Kerala</h2>
+
+            <div class="main-weather">
+
+                <div class="weather-icon">
+                    ☁️
+                </div>
+
+                <div>
+                    <h3 id="temperature">28°C</h3>
+                    <p id="condition">Partly Cloudy</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Weather Information -->
+        <section class="weather-info">
+
+            <div class="info-card">
+                <span>💧</span>
+                <h3 id="humidity">78%</h3>
+                <p>Humidity</p>
+            </div>
+
+            <div class="info-card">
+                <span>💨</span>
+                <h3 id="wind">12 km/h</h3>
+                <p>Wind</p>
+            </div>
+
+            <div class="info-card">
+                <span>🌧️</span>
+                <h3 id="rain">20%</h3>
+                <p>Rain Chance</p>
+            </div>
+
+            <div class="info-card">
+                <span>👁️</span>
+                <h3 id="visibility">8 km</h3>
+                <p>Visibility</p>
+            </div>
+
+        </section>
+
+        <!-- Weather Risk -->
+
+<section class="risk-section">
+
+    <h2>⚠️ Weather Risk & Alerts</h2>
+
+    <div id="riskAlert" class="risk-alert">
+        🟢 No major weather risks detected.
+    </div>
+
+    <p id="riskMessage">
+        Weather conditions are currently normal.
+    </p>
+
+</section>
+
+<!-- Historical & Climate Analysis -->
+
+<section class="climate-section">
+
+    <h2>📊 Historical & Climate Analysis</h2>
+
+    <p class="climate-description">
+        Analyze past weather conditions for a selected location.
+    </p>
+
+    <div class="climate-controls">
+
+        <input
+            type="number"
+            id="climateYear"
+            value="2025"
+            min="1940"
+            max="2025"
+            placeholder="Year"
+        >
+
+        <button onclick="getClimateData()">
+            Analyze
+        </button>
+
+    </div>
+
+    <div class="climate-cards">
+
+        <div class="climate-card">
+            <span>🌡️</span>
+            <h3 id="avgTemperature">--</h3>
+            <p>Average Temperature</p>
+        </div>
+
+        <div class="climate-card">
+            <span>🔥</span>
+            <h3 id="maxTemperature">--</h3>
+            <p>Highest Temperature</p>
+        </div>
+
+        <div class="climate-card">
+            <span>❄️</span>
+            <h3 id="minTemperature">--</h3>
+            <p>Lowest Temperature</p>
+        </div>
+
+        <div class="climate-card">
+            <span>🌧️</span>
+            <h3 id="totalRainfall">--</h3>
+            <p>Total Rainfall</p>
+        </div>
+
+    </div>
+
+    <div class="climate-result" id="climateResult">
+        Select a year and click Analyze.
+    </div>
+
+</section>
+
+<!-- Weather Map -->
+
+<section class="map-section">
+
+    <h2>🗺️ Weather Map</h2>
+
+    <p class="map-description">
+        View the selected location on the map.
+    </p>
+
+    <div id="weatherMap"></div>
+
+    <div id="mapWeatherInfo" class="map-weather-info">
+        Search for a city to view it on the map.
+    </div>
+
+</section>
+
+<!-- Agriculture Advisory -->
+
+<section class="agriculture-section">
+
+    <h2>🌾 Agriculture Advisory</h2>
+
+    <p>
+        Weather-based advice for farming activities.
+    </p>
+
+    <div id="agricultureAdvice">
+        Search for a location to get farming advice.
+    </div>
+
+</section>
+        <!-- Forecast -->
+        <section class="forecast">
+
+            <h2>7-Day Forecast</h2>
+
+            <div class="forecast-container">
+
+                <div class="day">
+                    <p>Mon</p>
+                    <span>☀️</span>
+                    <h3>29°</h3>
+                </div>
+
+                <div class="day">
+                    <p>Tue</p>
+                    <span>🌧️</span>
+                    <h3>27°</h3>
+                </div>
+
+                <div class="day">
+                    <p>Wed</p>
+                    <span>☁️</span>
+                    <h3>28°</h3>
+                </div>
+
+                <div class="day">
+                    <p>Thu</p>
+                    <span>🌧️</span>
+                    <h3>26°</h3>
+                </div>
+
+                <div class="day">
+                    <p>Fri</p>
+                    <span>☀️</span>
+                    <h3>30°</h3>
+                </div>
+
+                <div class="day">
+                    <p>Sat</p>
+                    <span>☁️</span>
+                    <h3>29°</h3>
+                </div>
+
+                <div class="day">
+                    <p>Sun</p>
+                    <span>☀️</span>
+                    <h3>30°</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Hourly Forecast -->
+
+<section class="hourly-section">
+
+    <h2>🕐 Hourly Forecast</h2>
+
+    <p class="hourly-description">
+        Weather forecast for the coming hours.
+    </p>
+
+    <div class="hourly-layout">
+
+        <div id="hourlyForecast" class="hourly-container">
+            <p>Search for a city to see the hourly forecast.</p>
+        </div>
+    
+        <div class="temperature-graph">
+    
+            <h3>🌡️ Temperature</h3>
+    
+            <canvas id="temperatureChart"></canvas>
+    
+        </div>
+    
+    </div>
+
+</section>
+
+        <!-- WeatherGPT Chat -->
+        <section class="chat-section">
+
+            <h2>🤖 Ask WeatherGPT</h2>
+
+            <div class="language-box">
+
+                <label for="languageSelect">🌐 Language:</label>
+            
+                <select id="languageSelect">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ml">മലയാളം</option>
+                </select>
+            
+            </div>
+        
+            <p class="chat-description">
+                Ask WeatherGPT about weather, forecasts, rain, temperature, wind and more.
+            </p>
+        
+            <div id="chatMessages" class="chat-messages">
+        
+                <div class="bot-message">
+                    👋 Hello! I'm WeatherGPT. Ask me about the weather.
+                </div>
+        
+            </div>
+        
+            <div class="chat-input">
+
+                <input
+                    type="text"
+                    id="questionInput"
+                    placeholder="Ask about the weather..."
+                >
+            
+                <button class="voice-button" onclick="startVoice()">
+                    🎙️
+                </button>
+            
+                <button onclick="askQuestion()">
+                    Send
+                </button>
+            
+            </div>
+            
+            <div class="voice-answer-control">
+            
+                <button onclick="stopSpeaking()">
+                    🔇 Stop Voice
+                </button>
+            
+            </div>
+                
+                <div id="voiceOverlay" class="voice-overlay">
+                
+                    <div class="voice-box">
+                
+                        <div id="voiceMic" class="voice-mic">
+                            🎙️
+                        </div>
+                
+                        <h2 id="voiceTitle">Listening...</h2>
+                
+                        <p id="voiceText">
+                            Speak now
+                        </p>
+                
+                        <div class="voice-waves">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                
+                        <button onclick="stopVoice()" class="stop-voice">
+                            Cancel
+                        </button>
+                
+                    </div>
+                
+            
+            <p id="voiceStatus"></p>
+        
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>WeatherGPT © 2026</p>
+            <p>AI-powered weather intelligence</p>
+        </footer>
+
+    </div>
+    <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+    <script src="script.js"></script>
+
+</body>
+</html>
